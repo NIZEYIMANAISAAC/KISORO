@@ -1,0 +1,64 @@
+/* Global */
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: #f7f9fb;
+  color: #222;
+}
+
+/* Hero */
+.hero {
+  background: linear-gradient(135deg, rgba(13,110,253,0.06), rgba(0,0,0,0.02));
+  border-left: 6px solid #0d6efd;
+  padding: 3rem 1.25rem;
+  border-radius: 0.5rem;
+}
+.hero .display-5 {
+  color: #0d6efd;
+  letter-spacing: -0.5px;
+}
+.hero .lead {
+  font-size: 1.15rem;
+  color: #333;
+}
+
+/* Quick links */
+.quick-links .btn {
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.45rem;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.quick-links .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(13,110,253,0.08);
+}
+
+/* Cards & Lists */
+.card {
+  border: none;
+  box-shadow: 0 2px 8px rgba(12,15,20,0.04);
+}
+.testimonial {
+  background: linear-gradient(90deg, #ffffff, #fbfdff);
+  border-radius: 8px;
+}
+.list-group-item {
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.04);
+}
+.list-group-item:last-child {
+  border-bottom: none;
+}
+.events-list .list-group-item:hover {
+  background: #f4f8ff;
+}
+
+/* Contact */
+#contact p { margin-bottom: 0; }
+
+/* Footer */
+footer { background: #111827; color: #cbd5e1; }
+
+/* Responsive tweaks */
+@media (min-width: 992px) {
+  .hero .display-5 { font-size: 3rem; }
+}

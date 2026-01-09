@@ -1,0 +1,65 @@
+{% extends 'vision/base.html' %}
+
+{% block content %}
+<h1>Student Life</h1>
+
+<h3>Co-curricular Activities & Clubs</h3>
+{% for c in clubs %}
+  <div class="mb-2">
+    <h5>{{ c.name }}</h5>
+    <p>{{ c.description|truncatewords:30 }}</p>
+  </div>
+{% empty %}
+  <p>No clubs yet.</p>
+{% endfor %}
+
+<h3 class="mt-4">Sports & Teams</h3>
+{% for s in sports %}
+  <div class="mb-2">
+    <h5>{{ s.name }}</h5>
+    <p><small class="text-muted">Coach: {{ s.coach }}</small></p>
+    <p>{{ s.description|truncatewords:30 }}</p>
+  </div>
+{% empty %}
+  <p>No sports teams yet.</p>
+{% endfor %}
+
+<h3 class="mt-4">Events & Activities</h3>
+{% for a in activities %}
+  <div class="mb-2">
+    <h5>{{ a.title }} {% if a.date %}<small class="text-muted">({{ a.date }})</small>{% endif %}</h5>
+    <p>{{ a.details|truncatewords:30 }}</p>
+  </div>
+{% empty %}
+  <p>No activities yet.</p>
+{% endfor %}
+
+<h3 class="mt-4">Student Council</h3>
+{% for m in council %}
+  <p><strong>{{ m.role }}:</strong> {{ m.name }}{% if m.year %} ({{ m.year }}){% endif %}</p>
+{% empty %}
+  <p>No council members added yet.</p>
+{% endfor %}
+
+<h3 class="mt-4">Counseling & Well-being</h3>
+{% for r in counseling %}
+  <div class="mb-2">
+    <h5>{{ r.title }}</h5>
+    <p>{{ r.description|truncatewords:30 }}</p>
+    <p class="small text-muted">Contact: {{ r.contact }}</p>
+  </div>
+{% empty %}
+  <p>No counseling resources yet.</p>
+{% endfor %}
+
+<h3 class="mt-4">School Transport</h3>
+{% for t in transport %}
+  <div class="mb-2">
+    <h5>{{ t.name }}</h5>
+    <p>{{ t.details|truncatewords:30 }}</p>
+  </div>
+{% empty %}
+  <p>No transport routes added yet.</p>
+{% endfor %}
+
+{% endblock %}

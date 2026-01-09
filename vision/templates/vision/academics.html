@@ -1,0 +1,66 @@
+{% extends 'vision/base.html' %}
+
+{% block content %}
+<h1>Academics</h1>
+
+<h3>Curriculum Overview</h3>
+<p>Our curriculum is designed to provide a balanced education across academics, co-curricular activities and life skills.</p>
+
+<div class="row">
+  <div class="col-md-6">
+    <h4>Programs Offered</h4>
+    <ul>
+    {% for p in programs %}
+      <li><strong>{{ p.name }}</strong> — {{ p.get_level_display }}<br>{{ p.overview|truncatewords:30 }}</li>
+    {% empty %}
+      <li>No programs defined yet.</li>
+    {% endfor %}
+    </ul>
+
+    <h4>Subjects & Departments</h4>
+    {% for d in departments %}
+      <h5>{{ d.name }}</h5>
+      <p>{{ d.description }}</p>
+      <ul>
+      {% for s in subjects|dictsort:"name" %}
+        {% if s.department and s.department.id == d.id %}
+        <li>{{ s.name }}{% if s.programs.all %} — for {% for pr in s.programs.all %}{{ pr.name }}{% if not forloop.last %}, {% endif %}{% endfor %}{% endif %}</li>
+        {% endif %}
+      {% endfor %}
+      </ul>
+    {% empty %}
+      <p>No departments yet.</p>
+    {% endfor %}
+  </div>
+
+  <div class="col-md-6">
+    <h4>Academic Calendar</h4>
+    <ul class="list-group">
+      {% for c in calendar %}
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div>
+          <div class="fw-bold">{{ c.title }}</div>
+          <div class="small text-muted">{{ c.date }}</div>
+          <div>{{ c.details|truncatewords:20 }}</div>
+        </div>
+      </li>
+      {% empty %}
+      <li class="list-group-item">No calendar entries.</li>
+      {% endfor %}
+    </ul>
+
+    <h4 class="mt-4">Assessment & Results</h4>
+    {% for r in results %}
+      <div class="card mb-2">
+        <div class="card-body">
+          <h5 class="card-title">{{ r.program.name }} — {{ r.year }}</h5>
+          <p class="card-text">{{ r.summary|truncatewords:30 }}</p>
+        </div>
+      </div>
+    {% empty %}
+      <p>No results yet.</p>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

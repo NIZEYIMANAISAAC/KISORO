@@ -1,0 +1,26 @@
+{% extends 'vision/base.html' %}
+
+{% block content %}
+<h1>Parents</h1>
+<p>Welcome to the parents' section. Find policies, notices and resources here.</p>
+
+<h3>Notices & Circulars</h3>
+{% for n in notices %}
+  <div class="card mb-2">
+    <div class="card-body">
+      <h5 class="card-title">{{ n.title }}</h5>
+      <p class="small text-muted">{{ n.date }}</p>
+      <p>{{ n.content|truncatewords:40 }}</p>
+      {% if n.file %}
+      <a href="{{ n.file.url }}" class="btn btn-sm btn-outline-secondary">Download</a>
+      {% endif %}
+    </div>
+  </div>
+{% empty %}
+  <p>No notices at the moment.</p>
+{% endfor %}
+
+<h3 class="mt-4">Parent–Teacher Meetings & Communication</h3>
+<p>Details about meetings and how the school communicates with parents will appear here.</p>
+
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'vision/base.html' %}
+
+{% block content %}
+<h1>Our Staff</h1>
+<div class="row">
+  {% for s in staff %}
+  <div class="col-md-4 mb-3">
+    <div class="card h-100">
+      {% if s.photo %}
+      <img src="{{ s.photo.url }}" class="card-img-top" alt="{{ s.name }}">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title"><a href="{% url 'vision:staff_detail' s.pk %}">{{ s.name }}</a></h5>
+        <p class="small text-muted">{{ s.role }}</p>
+        <p>{{ s.bio|truncatewords:20 }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

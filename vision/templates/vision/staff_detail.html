@@ -1,0 +1,36 @@
+{% extends 'vision/base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-8">
+    <h1>{{ staff.name }}</h1>
+    <p class="small text-muted">{{ staff.role }}</p>
+    <p>{{ staff.bio }}</p>
+
+    <h5>Qualifications</h5>
+    <p>{{ staff.qualifications }}</p>
+
+    <h5>Professional Development</h5>
+    <p>{{ staff.professional_development }}</p>
+
+    <h5>Subjects</h5>
+    <ul>
+      {% for subj in staff.subjects.all %}
+      <li>{{ subj.name }}</li>
+      {% empty %}
+      <li>No subjects listed.</li>
+      {% endfor %}
+    </ul>
+
+    {% if staff.cv %}
+    <a href="{{ staff.cv.url }}" class="btn btn-outline-secondary">Download CV</a>
+    {% endif %}
+  </div>
+  <div class="col-md-4">
+    {% if staff.photo %}
+    <img src="{{ staff.photo.url }}" class="img-fluid rounded" alt="{{ staff.name }}">
+    {% endif %}
+    <p class="mt-2"><strong>Hire date:</strong> {{ staff.hire_date }}</p>
+  </div>
+</div>
+{% endblock %}

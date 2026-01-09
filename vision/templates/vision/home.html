@@ -1,0 +1,96 @@
+{% extends 'vision/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- Hero -->
+<div class="p-5 mb-4 bg-light rounded-3 hero">
+  <div class="container hero-inner py-5">
+    <h1 class="display-5 fw-bold">{{ siteinfo.school_name }}</h1>
+    <p class="lead">{{ siteinfo.motto }}</p>
+    <p>{{ siteinfo.principal_message }}</p>
+    <a class="btn btn-primary btn-lg" href="#admissions" role="button">{{ siteinfo.admissions_open|yesno:"Admissions Open,Apply Now" }}</a>
+  </div>
+</div>
+
+<div class="container my-4">
+  <!-- Quick Links -->
+  <div class="row mb-4 quick-links">
+    <div class="col-12">
+      <h2>Quick Links</h2>
+    </div>
+  {% for link in quick_links %}
+  <div class="col-6 col-md-2 mb-2">
+    <a class="btn btn-outline-secondary w-100" href="{{ link.url }}">{{ link.title }}</a>
+  </div>
+  {% empty %}
+  <div class="col-12">No quick links yet. Add some in the admin.</div>
+  {% endfor %}
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <h3>Highlights</h3>
+    <ul class="list-unstyled">
+      {% for a in achievements %}
+      <li><strong>{{ a.title }}</strong> — {{ a.year }}</li>
+      {% empty %}
+      <li>No achievements yet.</li>
+      {% endfor %}
+    </ul>
+
+    <h3 class="mt-4">Testimonials</h3>
+    {% for t in testimonials %}
+    <div class="card mb-2 testimonial">
+      <div class="card-body">
+        <p class="card-text">"{{ t.content }}"</p>
+        <p class="card-text"><small class="text-muted">— {{ t.author }}{% if t.role %}, {{ t.role }}{% endif %}</small></p>
+      </div>
+    </div>
+    {% empty %}
+    <p>No testimonials yet.</p>
+    {% endfor %}
+
+  </div>
+
+  <div class="col-md-8">
+    <h3>Upcoming Events</h3>
+    <ul class="list-group mb-4 events-list">
+      {% for e in events %}
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div>
+          <div class="fw-bold">{{ e.title }}</div>
+          <div class="small text-muted">{{ e.date }}</div>
+          <div>{{ e.description|truncatewords:25 }}</div>
+        </div>
+      </li>
+      {% empty %}
+      <li class="list-group-item">No events scheduled.</li>
+      {% endfor %}
+    </ul>
+
+    <h3>News & Announcements</h3>
+    <div class="list-group">
+      {% for n in news %}
+      <a class="list-group-item list-group-item-action" href="{{ n.link|default:'#' }}">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ n.title }}</h5>
+          <small class="text-muted">{{ n.date }}</small>
+        </div>
+        <p class="mb-1">{{ n.summary|truncatewords:30 }}</p>
+      </a>
+      {% empty %}
+      <div class="list-group-item">No news yet.</div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+  </div> <!-- /.container -->
+
+<!-- Contact Summary -->
+<div id="contact" class="mt-5">
+  <h3>Contact</h3>
+  <p>{{ siteinfo.address }} | {{ siteinfo.contact_phone }} | {{ siteinfo.contact_email }}</p>
+</div>
+
+{% endblock %}
